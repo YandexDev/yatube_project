@@ -5,6 +5,7 @@ from . import views
 urlpatterns = [
     # Главная страница
     path('', views.index),
-    # Страницы сообществ
+    # Страницы сообществ ждем переменную slug типа slug
+    # Конвертор тип slug - строки и положиетельные числа
     path('group/<slug:slug>/', views.group_posts),
 ]
