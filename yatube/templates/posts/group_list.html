@@ -1,26 +1,21 @@
-{% extends 'base.html' %}
-{% block title %}{{ title }}{% endblock %}
+{% extends 'base.html' %} 
+{% block title %}
+Записи сообщества {{ group.title }}
+{% endblock %}
 {% block content %}
 <div class="container py-5">
-  <h1>Лев Толстой – зеркало русской революции.</h1>
-  <p>
-    Группа тайных поклонников графа.
-  </p>
+  <h1>Это группа {{ group.title }}</h1>
+  <p>Это описание группы {{ group.description }}</p>
   <article>
     {% for post in posts %}
     <ul>
-      <li>
-        Автор: {{ post.author.get_full_name }}
-      </li>
-      <li>
-        Дата публикации: {{ post.pub_date|date:"d E Y" }}
-      </li>
-    </ul>      
-    <p>
-      {{ post.text }}
-    </p>
-    {% if not forloop.last %}<hr>{% endif %}
-    {% endfor %}         
+      <li>Автор: {{ post.author.get_full_name }}</li>
+      <li>Дата публикации: {{ post.pub_date|date:"d E Y" }}</li>
+    </ul>
+    <p>{{ post.text }}</p>
+    {% if not forloop.last %}
+    <hr />
+    {% endif %} {% endfor %}
   </article>
 </div>
 {% endblock %}

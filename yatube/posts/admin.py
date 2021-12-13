@@ -1,5 +1,4 @@
 from django.contrib import admin
-# Register your models here.
 from .models import Post, Group
 
 
@@ -14,6 +13,11 @@ class PostAdmin(admin.ModelAdmin):
     # Это свойство сработает для всех колонок: где пусто — там будет эта строка
     empty_value_display = '-пусто-'
 
+class GroupAdmin(admin.ModelAdmin):
+    list_display = ('pk', 'title', 'description')
+    search_fields = ('text',)
+    list_filter = ('title',)
+    empty_value_display = '-пусто-'
 
 admin.site.register(Post, PostAdmin)
-admin.site.register(Group)
+admin.site.register(Group, GroupAdmin)
