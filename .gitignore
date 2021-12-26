@@ -1,5 +1,5 @@
 # Dev/yatube_project/.gitignore
-
+setup.cfg
 .vscode/
 
 # Byte-compiled / optimized / DLL files
