@@ -1,4 +1,6 @@
-"""yatube URL Configuration
+"""Настраиваются URL проекта.
+
+yatube URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.2/topics/http/urls/
@@ -17,6 +19,12 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
+    # Дорогой Джанго, если на сервер пришёл любой запрос (''),
+    # перейди в файл urls приложения ice_cream
+    # и проверь там все path() на совпадение с запрошенным URL
+    # Добавляем к путям из приложения posts пространство имён posts (для ссылок)
     path("", include("posts.urls", namespace="posts")),
+    # Если в приложении ice_cream не найдётся совпадений -
+    # Django продолжит искать совпадения здесь, в головном файле urls.py.
     path("admin/", admin.site.urls),
 ]

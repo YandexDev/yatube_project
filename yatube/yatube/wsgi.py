@@ -1,4 +1,5 @@
-"""
+"""Это файл конфигурации WSGI-сервера,
+он пригодится при размещении проекта на веб-сервере.
 WSGI config for yatube project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.

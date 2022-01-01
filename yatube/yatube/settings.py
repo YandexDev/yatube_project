@@ -29,7 +29,9 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-
+# Практичнее регистрировать через конфиг: ведь тогда в apps.py можно будет
+# в любой момент добавить дополнительные настройки приложения. При регистрации
+# через имя такой возможности не будет.
 INSTALLED_APPS = [
     "posts.apps.PostsConfig",
     "django.contrib.admin",
@@ -56,8 +58,12 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, "templates")
 
 TEMPLATES = [
     {
+        # Шаблонизатор (DTL pr Jinja2)
         "BACKEND": "django.template.backends.django.DjangoTemplates",
+        # Добавлено: Искать шаблоны на уровне проекта
         "DIRS": [TEMPLATES_DIR],
+        # Оставляем True: шаблоны встроенных приложений (например, админки)
+        # нужно искать в директориях приложений
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
