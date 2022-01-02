@@ -38,6 +38,7 @@ class Post(models.Model):
         # Если из таблицы User будет удалён пользователь, то будут удалены все связанные с ним посты
         on_delete=models.CASCADE,
         # TODO: Почитать больше про related_name
+        # У модели User автоматически появится свойство posts, оно ссылается на все записи текущего автора.
         related_name="posts",
     )
     group = models.ForeignKey(

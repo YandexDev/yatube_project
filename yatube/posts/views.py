@@ -50,6 +50,9 @@ def group_posts(request, slug):
     # поле slug у которых соответствует значению slug в запросе
     group = get_object_or_404(Group, slug=slug)
     # posts = Post.objects.filter(group=group).order_by('-pub_date')[:10] ниже одинакого
+    #  group.groups — это выборка тех объектов из модели Post,
+    #  у которых в поле slug стоит "slug" (которые связаны с group),
+    #  потому что group — это объект Group с slug=slug (который в url)
     posts = group.groups.all()[:10]
 
     context = {

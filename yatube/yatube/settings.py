@@ -33,9 +33,11 @@ ALLOWED_HOSTS = []
 # в любой момент добавить дополнительные настройки приложения. При регистрации
 # через имя такой возможности не будет.
 INSTALLED_APPS = [
-    "posts.apps.PostsConfig",
+    "core.apps.CoreConfig",  # Регистрация приложения core
+    "posts.apps.PostsConfig",  # Регистрация приложения posts
+    "users.apps.UsersConfig",  # Регистрация приложения users
     "django.contrib.admin",
-    "django.contrib.auth",
+    "django.contrib.auth",  # Приложение для регистрация и авторизация пользователей
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
@@ -112,7 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "ru"
 
 TIME_ZONE = "UTC"
 
