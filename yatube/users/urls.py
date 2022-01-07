@@ -1,6 +1,4 @@
 # Импортируем из приложения django.contrib.auth нужный view-класс
-from re import template
-
 from django.contrib.auth.views import (
     LoginView,
     LogoutView,
@@ -38,25 +36,33 @@ urlpatterns = [
     # восстановление пароля: форма для восстановления пароля через email
     path(
         "password_reset/",
-        PasswordResetView.as_view(template_name="users/password_reset_form.html"),
+        PasswordResetView.as_view(
+            template_name="users/password_reset_form.html"
+        ),
         name="password_reset_form",
     ),
     # восстановление пароля: уведомление об отправки ссылки
     path(
         "password_reset/done/",
-        PasswordResetDoneView.as_view(template_name="users/password_reset_done.html"),
+        PasswordResetDoneView.as_view(
+            template_name="users/password_reset_done.html"
+        ),
         name="password_reset_done",
     ),
     # смена пароля: задать новый пароль
     path(
         "password_change/",
-        PasswordChangeView.as_view(template_name="users/password_change_form.html"),
+        PasswordChangeView.as_view(
+            template_name="users/password_change_form.html"
+        ),
         name="password_change_form",
     ),
     # смена пароля: уведомление
     path(
         "password_change/done/",
-        PasswordChangeDoneView.as_view(template_name="users/password_change_done.html"),
+        PasswordChangeDoneView.as_view(
+            template_name="users/password_change_done.html"
+        ),
         name="password_change_done",
     ),
     # восстановление пароля: страница подтверждения сброса пароля;
