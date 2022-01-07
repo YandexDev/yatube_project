@@ -4,8 +4,8 @@
 на выходе объект ответа HttpResponse
 
 from django.http import HttpResponse
-# Страница с информацией об одном сорте мороженого(как пример);
-# view-функция принимает параметр pk из urls.py - path('ice_cream/<int:pk>/', views.ice_cream_detail):
+Страница с информацией об одном сорте мороженого(как пример);
+view-функция принимает параметр pk из urls.py - path('ice_cream/<int:pk>/', views.ice_cream_detail):
 
 def icecream_detail(request, pk):
     return HttpResponse(f'Мороженое номер {pk}')
@@ -24,7 +24,7 @@ from django.core.paginator import Paginator
 # render() возвращает шаблоны из файла
 from django.shortcuts import get_object_or_404, render
 
-from .models import Group, Post
+from .models import Group, Post, User
 
 
 def index(request):
@@ -35,12 +35,12 @@ def index(request):
     # Показывать по 10 записей на странице
     paginator = Paginator(posts, 10)
     # Из URL извлекаем номер запрошенной страницы - это значение параметра page
-    page_number = request.GET.get('page')
+    page_number = request.GET.get("page")
     # Получаем набор записей для страницы с запрошенным номером
     page_obj = paginator.get_page(page_number)
     # В словаре context отправляем информацию в шаблон
     context = {
-        'page_obj': page_obj,
+        "page_obj": page_obj,
     }
     # Полученные записи передаются в код как объекты класса Post,
     # сохраняются в виде списка в переменной page_obj и передаются в словаре context
@@ -65,13 +65,48 @@ def group_posts(request, slug):
     #  потому что group — это объект Group с slug=slug (который в url)
     posts = group.groups.all()
     paginator = Paginator(posts, 10)
-    page_number = request.GET.get('page')
+    page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     context = {
         "group": group,
-        'page_obj': page_obj,
+        "page_obj": page_obj,
     }
 
     template = "posts/group_list.html"
 
     return render(request, template, context)
+
+
+# Создание страницы профайла
+def profile(request, username):
+    # Здесь код запроса к модели и создание словаря контекста
+    author = get_object_or_404(User, username=username)
+    posts = author.posts.all()
+    count = author.posts.count()
+    paginator = Paginator(posts, 10)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    context = {
+        "page_obj": page_obj,
+        "count": count,
+        "author": author,
+    }
+    return render(request, "posts/profile.html", context)
+
+
+# Создание страницы отдельного поста
+def post_detail(request, post_id):
+    # Здесь код запроса к модели и создание словаря контекста
+    post = get_object_or_404(Post, pk=post_id)
+    pub_date = post.pub_date
+    post_title = post.text[:30]
+    author = post.author
+    author_posts = author.posts.all().count()
+    context = {
+        'post': post,
+        'post_title': post_title,
+        'author': author,
+        'author_posts': author_posts,
+        'pub_date': pub_date,
+    }
+    return render(request, "posts/post_detail.html", context)

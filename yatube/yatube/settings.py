@@ -141,10 +141,10 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 # Значение по умолчанию: '/accounts/login/'
 # Это адрес, на который Django будет перенаправлять пользователей для авторизации.
 # Это особенно важно при использовании декоратора @login_required
-LOGIN_URL = 'users:login'
+LOGIN_URL = "users:login"
 # Значение по умолчанию: '/accounts/profile/'
 # Здесь указывается, куда перенаправить пользователя после успешной авторизации
-LOGIN_REDIRECT_URL = 'posts:index'
+LOGIN_REDIRECT_URL = "posts:index"
 # Значение по умолчанию: '/auth/logout/'
 # Адрес, на который будет направлен пользователь после выхода из системы.
 # Можно оставить штатный, а можно раскомментировать строку
@@ -155,6 +155,6 @@ LOGIN_REDIRECT_URL = 'posts:index'
 # Подключите к проекту модуль filebased.EmailBackend:
 # он будет сохранять текст отправленных электронных писем в файлы в отдельную директорию
 # подключаем движок filebased.EmailBackend
-EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 # указываем директорию, в которую будут складываться файлы писем
-EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails')
+EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")

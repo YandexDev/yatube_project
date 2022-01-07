@@ -31,7 +31,7 @@ urlpatterns = [
     # если не найдут будут прернаправлены в модуль django.contrib.auth
     path("auth/", include("django.contrib.auth.urls")),
     #  приложение about - статичные страницы
-    path('about/', include('about.urls', namespace='about')),
+    path("about/", include("about.urls", namespace="about")),
     # для админки
     path("admin/", admin.site.urls),
 ]
