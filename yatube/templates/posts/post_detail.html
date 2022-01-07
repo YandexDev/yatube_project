@@ -34,6 +34,10 @@
         <p>
             {{ post.text }} 
         </p>
+        <!-- эта кнопка видна только автору -->
+        <a class="btn btn-primary" href="{% url 'posts:post_edit' post.pk %}">
+        редактировать запись
+        </a>
     </article>
     </div>
 </div>
