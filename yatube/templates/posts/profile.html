@@ -2,36 +2,37 @@
 {% block title %}Профайл пользователя {{ author }}{% endblock %}
 {% block content %}
 <main>
-    <div class="container py-5">        
+  <div class="container py-5">
     <h1>Все посты пользователя {{ author.get_full_name }}</h1>
-    <h3>Всего постов: {{ count }} </h3>   
+    <h3>Всего постов: {{ count }} </h3>
     <article>
-    {% for post in page_obj %}
-        <ul>
+      {% for post in page_obj %}
+      <ul>
         {% comment %} <li>
-            Автор: {{ post.author.get_full_name }}
-            <a href="{% url 'posts:profile' post.author.username %}">все посты пользователя</a>
+          Автор: {{ post.author.get_full_name }}
+          <a href="{% url 'posts:profile' post.author.username %}">все посты пользователя</a>
         </li> {% endcomment %}
         <li>
-            Дата публикации: {{ post.pub_date|date:"d E Y" }}
+          Дата публикации: {{ post.pub_date|date:"d E Y" }}
         </li>
-        </ul>
-        <p>
+      </ul>
+      <p>
         {{ post.text }}
-        </p>
-        <a href="{% url 'posts:post_detail' post.pk %}">подробная информация </a>
+      </p>
+      <a href="{% url 'posts:post_detail' post.pk %}">подробная информация </a>
     </article>
     <br>
     {% if post.group %}
     <a href="{% url 'posts:group_list' post.group.slug %}">все записи группы</a>
     {% endif %}
-    {% if not forloop.last %}<hr>{% endif %}
+    {% if not forloop.last %}
+    <hr>{% endif %}
     {% empty %}
-        <p>Постов нет</p>
-    {% endfor %} 
+    <p>Постов нет</p>
+    {% endfor %}
     <!-- Остальные посты. после последнего нет черты -->
     <!-- Здесь подключён паджинатор -->
-    {% include 'posts/includes/paginator.html' %}  
-    </div>
+    {% include 'posts/includes/paginator.html' %}
+  </div>
 </main>
 {% endblock %}

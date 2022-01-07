@@ -1,30 +1,31 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 {% block title %}Записи сообщества {{ group.title }}
 {% endblock %}
 {% block content %}
-  <div class="container py-5">
-    <h1>Записи сообщества: {{ group.title }}</h1>
-    <p>{{ group.description }}</p>
-    <article>
-      {% for post in page_obj %}
-      <ul>
-        <li>Автор: {{ post.author.get_full_name }}
-            <a href="{% url 'posts:profile' post.author %}">все посты пользователя</a>
-        </li>
-        <li>Дата публикации: {{ post.pub_date|date:"d E Y" }}</li>
-      </ul>
-      <p>{{ post.text }}</p>
-      <a href="{% url 'posts:post_detail' post.pk %}">подробная информация</a>
-      <br>
-      <a href="{% url 'posts:group_list' post.group.slug %}">все записи группы</a> 
-      {# forloop хранит счётчик цикла и может определять разные состояния счётчика #}
-      {% if not forloop.last %}<hr>{% endif %}
-      {% empty %}
-        <p>Если цикл пуст выведется эта строка</p>
-      {% endfor %}
+<div class="container py-5">
+  <h1>Записи сообщества: {{ group.title }}</h1>
+  <p>{{ group.description }}</p>
+  <article>
+    {% for post in page_obj %}
+    <ul>
+      <li>Автор: {{ post.author.get_full_name }}
+        <a href="{% url 'posts:profile' post.author %}">все посты пользователя</a>
+      </li>
+      <li>Дата публикации: {{ post.pub_date|date:"d E Y" }}</li>
+    </ul>
+    <p>{{ post.text }}</p>
+    <a href="{% url 'posts:post_detail' post.pk %}">подробная информация</a>
+    <br>
+    <a href="{% url 'posts:group_list' post.group.slug %}">все записи группы</a>
+    {# forloop хранит счётчик цикла и может определять разные состояния счётчика #}
+    {% if not forloop.last %}
+    <hr>{% endif %}
+    {% empty %}
+    <p>Если цикл пуст выведется эта строка</p>
+    {% endfor %}
 
-      {% include 'posts/includes/paginator.html' %}
+    {% include 'posts/includes/paginator.html' %}
 
-    </article>
-  </div>
+  </article>
+</div>
 {% endblock %}

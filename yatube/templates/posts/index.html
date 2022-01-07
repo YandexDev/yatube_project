@@ -2,7 +2,7 @@
 {% block title %}Последние обновления на сайте{% endblock %}
 {% comment %} {% block header %}Последние обновления на сайте{% endblock %} {% endcomment %}
 {% block content %}
-<div class="container py-5">     
+<div class="container py-5">
   {% comment %} <h1>Последние обновления на сайте</h1> {% endcomment %}
   <article>
     {% for post in page_obj %}
@@ -14,7 +14,7 @@
       <li>
         Дата публикации: {{ post.pub_date|date:"d E Y" }}
       </li>
-    </ul>      
+    </ul>
     <p>
       {{ post.text }}
     </p>
@@ -25,12 +25,13 @@
     Будет использоваться во view-функции для фильтрации. {% endcomment %}
 
     {% if post.group %} <a href="{% url 'posts:group_list' post.group.slug %}">все записи группы</a> {% endif %}
-    
+
     {# forloop хранит счётчик цикла и может определять разные состояния счётчика(forloop.first) #}
-    {% if not forloop.last %}<hr>{% endif %}
+    {% if not forloop.last %}
+    <hr>{% endif %}
     {% empty %}
-      <p>Если цикл пуст выведется эта строка</p>
-    {% endfor %} 
+    <p>Если цикл пуст выведется эта строка</p>
+    {% endfor %}
 
     {% include 'posts/includes/paginator.html' %}
 

@@ -20,7 +20,6 @@ def icecream_detail(request, pk):
 
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
-
 # render() возвращает шаблоны из файла
 from django.shortcuts import get_object_or_404, redirect, render
 
@@ -107,11 +106,11 @@ def post_detail(request, post_id):
     author = post.author
     author_posts = author.posts.all().count()
     context = {
-        'post': post,
-        'post_title': post_title,
-        'author': author,
-        'author_posts': author_posts,
-        'pub_date': pub_date,
+        "post": post,
+        "post_title": post_title,
+        "author": author,
+        "author_posts": author_posts,
+        "pub_date": pub_date,
     }
 
     template = "posts/post_detail.html"
@@ -121,17 +120,17 @@ def post_detail(request, post_id):
 
 # Для создания нового поста
 def post_create(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
             post.save()
-            return redirect(f'/profile/{post.author}/', {'form': form})
+            return redirect(f"/profile/{post.author}/", {"form": form})
     form = PostForm()
     groups = Group.objects.all()
     template = "posts/create_post.html"
-    context = {'form': form, 'groups': groups}
+    context = {"form": form, "groups": groups}
     return render(request, template, context)
 
 
@@ -142,16 +141,16 @@ def post_edit(request, post_id):
     author = post.author
     groups = Group.objects.all()
     form = PostForm(request.POST or None, instance=post)
-    template = 'posts/create_post.html'
+    template = "posts/create_post.html"
     if request.user == author:
-        if request.method == 'POST' and form.is_valid:
+        if request.method == "POST" and form.is_valid:
             post = form.save()
-            return redirect('posts:post_detail', post_id)
+            return redirect("posts:post_detail", post_id)
         context = {
-            'form': form,
-            'is_edit': is_edit,
-            'post': post,
-            'groups': groups,
+            "form": form,
+            "is_edit": is_edit,
+            "post": post,
+            "groups": groups,
         }
         return render(request, template, context)
-    return redirect('posts:post_detail', post_id)
+    return redirect("posts:post_detail", post_id)

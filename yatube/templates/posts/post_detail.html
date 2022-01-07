@@ -2,44 +2,44 @@
 {% block title %}Пост {{ post_title }}{% endblock %}
 {% block content %}
 <main>
-<div class="container py-5">
+  <div class="container py-5">
     <div class="row">
-    <aside class="col-12 col-md-3">
+      <aside class="col-12 col-md-3">
         <ul class="list-group list-group-flush">
-        <li class="list-group-item">
+          <li class="list-group-item">
             Дата публикации: {{ pub_date|date:"d E Y" }}
-        </li>
-        {% if post.group %} 
-            <li class="list-group-item">
+          </li>
+          {% if post.group %}
+          <li class="list-group-item">
             Группа: {{ post.group.title }}
             <a href="{% url 'posts:group_list' post.group.slug %}">
-                все записи группы
+              все записи группы
             </a>
-        {% endif %}
-            </li>
-            <li class="list-group-item">
+            {% endif %}
+          </li>
+          <li class="list-group-item">
             Автор: {{ post.author.get_full_name }} {{ author }}
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-            Всего постов автора:  <span >{{ author_posts }}</span>
-        </li>
-        <li class="list-group-item">
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Всего постов автора: <span>{{ author_posts }}</span>
+          </li>
+          <li class="list-group-item">
             <a href="{% url 'posts:profile' post.author %}">
-            все посты пользователя
+              все посты пользователя
             </a>
-        </li>
+          </li>
         </ul>
-    </aside>
-    <article class="col-12 col-md-9">
+      </aside>
+      <article class="col-12 col-md-9">
         <p>
-            {{ post.text }} 
+          {{ post.text }}
         </p>
         <!-- эта кнопка видна только автору -->
         <a class="btn btn-primary" href="{% url 'posts:post_edit' post.pk %}">
-        редактировать запись
+          редактировать запись
         </a>
-    </article>
+      </article>
     </div>
-</div>
+  </div>
 </main>
 {% endblock %}
