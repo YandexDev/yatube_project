@@ -4,7 +4,7 @@
 на выходе объект ответа HttpResponse
 
 from django.http import HttpResponse
-# Страница с информацией об одном сорте мороженого;
+# Страница с информацией об одном сорте мороженого(как пример);
 # view-функция принимает параметр pk из urls.py - path('ice_cream/<int:pk>/', views.ice_cream_detail):
 
 def icecream_detail(request, pk):
@@ -19,6 +19,7 @@ def icecream_detail(request, pk):
 """
 
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 
 # render() возвращает шаблоны из файла
 from django.shortcuts import get_object_or_404, render
@@ -30,14 +31,20 @@ def index(request):
     # в переменную posts будет сохранена выборка из 10 объектов модели Post
     # по специальной точки входа .objects,
     # отсортированных по полю pub_date по убыванию (в мета-классе модели)
-    posts = Post.objects.all()[:10]
+    posts = Post.objects.all()
+    # Показывать по 10 записей на странице
+    paginator = Paginator(posts, 10)
+    # Из URL извлекаем номер запрошенной страницы - это значение параметра page
+    page_number = request.GET.get('page')
+    # Получаем набор записей для страницы с запрошенным номером
+    page_obj = paginator.get_page(page_number)
     # В словаре context отправляем информацию в шаблон
     context = {
-        "posts": posts,
+        'page_obj': page_obj,
     }
     # Полученные записи передаются в код как объекты класса Post,
-    # сохраняются в виде списка в переменной posts и передаются в словаре context
-    # под ключом 'posts' в шаблон posts/index.html.
+    # сохраняются в виде списка в переменной page_obj и передаются в словаре context
+    # под ключом 'page_obj' в шаблон posts/index.html.
 
     template = "posts/index.html"
     # TODO: Узнать больше про функцию render
@@ -56,11 +63,13 @@ def group_posts(request, slug):
     #  group.groups — это выборка тех объектов из модели Post,
     #  у которых в поле slug стоит "slug" (которые связаны с group),
     #  потому что group — это объект Group с slug=slug (который в url)
-    posts = group.groups.all()[:10]
-
+    posts = group.groups.all()
+    paginator = Paginator(posts, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     context = {
         "group": group,
-        "posts": posts,
+        'page_obj': page_obj,
     }
 
     template = "posts/group_list.html"

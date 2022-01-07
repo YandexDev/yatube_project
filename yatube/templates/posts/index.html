@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
 {% block title %}Последние обновления на сайте{% endblock %}
+{% comment %} {% block header %}Последние обновления на сайте{% endblock %} {% endcomment %}
 {% block content %}
 <div class="container py-5">     
   <h1>Последние обновления на сайте</h1>
   <article>
-    {% for post in posts %}
+    {% for post in page_obj %}
     <ul>
       <li>
         Автор: {{ post.author.get_full_name }}
@@ -28,6 +29,9 @@
     {% empty %}
       <p>Если цикл пуст выведется эта строка</p>
     {% endfor %} 
+
+    {% include 'posts/includes/paginator.html' %}
+
   </article>
 </div>
 {% endblock %}

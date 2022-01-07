@@ -6,7 +6,7 @@
     <h1>Это группа {{ group.title }}</h1>
     <p>Это описание группы {{ group.description }}</p>
     <article>
-      {% for post in posts %}
+      {% for post in page_obj %}
       <ul>
         <li>Автор: {{ post.author.get_full_name }}</li>
         <li>Дата публикации: {{ post.pub_date|date:"d E Y" }}</li>
@@ -17,6 +17,9 @@
       {% empty %}
         <p>Если цикл пуст выведется эта строка</p>
       {% endfor %}
+
+      {% include 'posts/includes/paginator.html' %}
+
     </article>
   </div>
 {% endblock %}
