@@ -3,15 +3,15 @@
 {% block content %}
 <main>
     <div class="container py-5">        
-    <h1>Все посты пользователя {{ author }} </h1>
+    <h1>Все посты пользователя {{ author.get_full_name }}</h1>
     <h3>Всего постов: {{ count }} </h3>   
     <article>
     {% for post in page_obj %}
         <ul>
-        <li>
+        {% comment %} <li>
             Автор: {{ post.author.get_full_name }}
             <a href="{% url 'posts:profile' post.author.username %}">все посты пользователя</a>
-        </li>
+        </li> {% endcomment %}
         <li>
             Дата публикации: {{ post.pub_date|date:"d E Y" }}
         </li>
