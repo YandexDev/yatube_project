@@ -18,6 +18,8 @@ def icecream_detail(request, pk):
 вместо этих ключей будут выведены значения, связанные с этими ключами.
 """
 
+from django.contrib.auth.decorators import login_required
+
 # render() возвращает шаблоны из файла
 from django.shortcuts import get_object_or_404, render
 
@@ -43,6 +45,7 @@ def index(request):
 
 
 # View-функция для страницы сообщества:
+@login_required  # Декторатор. Функция будет работать только авторизованным
 def group_posts(request, slug):
     # Функция get_object_or_404 получает по заданным критериям объект
     # из базы данных или возвращает сообщение об ошибке, если объект не найден.

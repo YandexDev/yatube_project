@@ -73,6 +73,10 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                # Добавлен контекст-процессор
+                # Найди в корне проекта папку core/, в ней - папку context_processors/,
+                # там - файл year.py, а в этом файле - функцию year().
+                "core.context_processors.year.year",
             ],
         },
     },
