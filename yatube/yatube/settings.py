@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "core.apps.CoreConfig",  # Регистрация приложения core
     "posts.apps.PostsConfig",  # Регистрация приложения posts
     "users.apps.UsersConfig",  # Регистрация приложения users
+    "about.apps.AboutConfig",  # Регистрация приложения about(статичные страницы)
     "django.contrib.admin",
     "django.contrib.auth",  # Приложение для регистрация и авторизация пользователей
     "django.contrib.contenttypes",
