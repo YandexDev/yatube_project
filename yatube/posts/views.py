@@ -20,6 +20,7 @@ def icecream_detail(request, pk):
 
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+
 # render() возвращает шаблоны из файла
 from django.shortcuts import get_object_or_404, redirect, render
 
@@ -119,6 +120,7 @@ def post_detail(request, post_id):
 
 
 # Для создания нового поста
+@login_required
 def post_create(request):
     if request.method == "POST":
         form = PostForm(request.POST)
